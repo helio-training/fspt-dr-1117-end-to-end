@@ -11,7 +11,13 @@ server.route({
     method: 'GET',
     path:'/', 
     handler: (request, h) => {
-        return 'hello world';
+        return { message: 'hello world' };
+    },
+    config: {
+        cors: {
+            origin: ['*'],
+            additionalHeaders: ['cache-control', 'x-requested-with']
+        }
     }
 });
 
