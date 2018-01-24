@@ -46,6 +46,15 @@ server.route({
     }
 })
 
+server.route({
+    method: 'POST',
+    path: '/cars',
+    handler: (request, h) => {
+        console.log(request.payload)
+        return h.response()
+    }
+})
+
 async function start() {
 
     try {
