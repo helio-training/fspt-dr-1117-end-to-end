@@ -52,6 +52,12 @@ server.route({
     handler: (request, h) => {
         console.log(request.payload)
         return h.response()
+    },
+    config: {
+        cors: {
+            origin: ['*'],
+            additionalHeaders: ['cache-control', 'x-requested-with']
+        }
     }
 })
 
