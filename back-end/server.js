@@ -1,11 +1,19 @@
 'use strict'
 
 const Hapi = require('hapi')
+const Monk = require('monk')
 
 const server = Hapi.server({ 
     host: 'localhost', 
     port: 3001
 })
+
+const getCarsCollection = async () => {
+    const connectionString = "mongodb://application:super1337@ds113358.mlab.com:13358/dealership"
+    const db = Monk(connectionString)
+    const cars = await db.get("cars")
+    return cars
+}
 
 server.route({
     method: 'GET',
@@ -24,19 +32,11 @@ server.route({
 server.route({
     method: 'GET',
     path:'/cars', 
-    handler: (request, h) => {
-        return { cars: [{
-                make: "Toyota",
-                model: "Tacoma",
-                year: 2009,
-                mileage: 100000
-            },{
-                make: "BMW",
-                model: "i8",
-                year: 2018,
-                mileage: 1
-            }]
-        }
+    handler: async (request, h) => {
+        const cars = await getCarsCollection()
+        const carObjects = await cars.find()
+        console.log(carObjects)
+        return { cars: carObjects ? carObjects : [] }
     },
     config: {
         cors: {
@@ -49,7 +49,9 @@ server.route({
 server.route({
     method: 'POST',
     path: '/cars',
-    handler: (request, h) => {
+    handler: async (request, h) => {
+        const cars = await getCarsCollection()
+        cars.insert(request.payload)
         console.log(request.payload)
         return h.response()
     },
