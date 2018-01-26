@@ -45,9 +45,9 @@ export default class extends Component {
         await this.postData("/cars", this.state)
     }
 
-    componentDidUpdate() {
-        console.log(this.state)
-    }
+    // componentDidUpdate() {
+    //     console.log(this.state)
+    // }
 
     render() {
         return (

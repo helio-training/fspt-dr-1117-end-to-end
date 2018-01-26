@@ -33,10 +33,10 @@ server.route({
     method: 'GET',
     path:'/cars', 
     handler: async (request, h) => {
-        const cars = await getCarsCollection()
-        const carObjects = await cars.find()
-        console.log(carObjects)
-        return { cars: carObjects ? carObjects : [] }
+        const carsCollection = await getCarsCollection()
+        const cars = await carsCollection.find()
+        console.log(cars)
+        return { cars }
     },
     config: {
         cors: {
