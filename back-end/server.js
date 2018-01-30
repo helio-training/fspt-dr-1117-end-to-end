@@ -31,6 +31,33 @@ server.route({
 
 server.route({
     method: 'GET',
+    path:'/planes', 
+    handler: (request, h) => {
+        return { planes: [
+            { 
+                name: "plane1",
+                size: "1"
+            },
+            { 
+                name: "plane2",
+                size: "10"
+            },
+            { 
+                name: "plane3",
+                size: "100"
+            }
+        ] }
+    },
+    config: {
+        cors: {
+            origin: ['*'],
+            additionalHeaders: ['cache-control', 'x-requested-with']
+        }
+    }
+})
+
+server.route({
+    method: 'GET',
     path:'/cars', 
     handler: async (request, h) => {
         const carsCollection = await getCarsCollection()
