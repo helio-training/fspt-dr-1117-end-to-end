@@ -1,0 +1,9 @@
+{
+  "name": "end-to-end",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "npm run start:server & npm run start:app",
+    "start:server": "node ./back-end/server",
+    "start:app": "cd front-end && yarn start"
+  }
+}
