@@ -28,7 +28,7 @@ export default class extends Component {
     }
 
     async postData(path, data) {
-        const url = `http://localhost:3001${path}`
+        const url = `https://back-end-eeeusepmqs.now.sh${path}`
         const response = await fetch(url, {
             method: 'POST',
             mode: 'CORS',
