@@ -7,5 +7,5 @@
 
 [build]
   base    = "front-end"
-  publish = "front-end\build"
+  publish = "front-end/build"
   command = "npm run build"
