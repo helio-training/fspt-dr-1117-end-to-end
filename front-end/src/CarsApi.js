@@ -1,4 +1,9 @@
-import ConfigOverride from "./config.json"
+let ConfigOverride
+try{
+    ConfigOverride = require("./config.json")
+} catch (e) {
+    // console.log(e)
+}
 
 const runConfig = () => {
     this.config = {
