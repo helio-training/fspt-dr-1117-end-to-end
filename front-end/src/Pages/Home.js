@@ -1,23 +1,15 @@
 import React, {Component} from 'react'
+import CarsApi from "./../CarsApi"
 
 export default class extends Component {
     state = {
         cars: [],
         planes: []
     }
-
-    getData = async (path) => {
-        const url = `https://back-end-eeeusepmqs.now.sh${path}`
-        const response = await fetch(url)
-        const data = await response.json()
-
-        return data
-    }
-
     
     async componentDidMount() {
-        const carsResponse = await this.getData("/cars")
-        const planesResponse = await this.getData("/planes")
+        const carsResponse = await CarsApi.get("/cars")
+        const planesResponse = await CarsApi.get("/planes")
 
         console.log("ServerData:", carsResponse)
         this.setState({ 

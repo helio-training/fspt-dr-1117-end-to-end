@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CarsApi from './../CarsApi'
 
 export default class extends Component {
     state = {
@@ -27,27 +28,9 @@ export default class extends Component {
         }
     }
 
-    async postData(path, data) {
-        const url = `https://back-end-eeeusepmqs.now.sh${path}`
-        const response = await fetch(url, {
-            method: 'POST',
-            mode: 'CORS',
-            body: JSON.stringify(data),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        console.log(response)
-        return response
-    }
-
     clickHandler = async () => {
-        await this.postData("/cars", this.state)
+        await CarsApi.post("/cars", this.state)
     }
-
-    // componentDidUpdate() {
-    //     console.log(this.state)
-    // }
 
     render() {
         return (
