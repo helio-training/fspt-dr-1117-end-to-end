@@ -1,11 +1,15 @@
 let ConfigOverride
 try{
-    ConfigOverride = require("./config.json")
+    ConfigOverride = require("./config2.json")
 } catch (e) {
     // console.log(e)
 }
 
 const runConfig = () => {
+    console.log(process.env)
+    console.log(process.env['CARS_API_ROOT'])
+    console.log(process.env.CARS_API_ROOT)
+    
     this.config = {
         carsApiRoot: ConfigOverride 
                         ? ConfigOverride.carsApiRoot 
