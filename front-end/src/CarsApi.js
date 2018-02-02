@@ -5,15 +5,11 @@ try{
     // console.log(e)
 }
 
-const runConfig = () => {
-    console.log(process.env)
-    console.log(process.env['CARS_API_ROOT'])
-    console.log(process.env.CARS_API_ROOT)
-    
+const runConfig = () => {    
     this.config = {
         carsApiRoot: ConfigOverride 
                         ? ConfigOverride.carsApiRoot 
-                        : process.env.CARS_API_ROOT
+                        : process.env.REACT_APP_CARS_API_ROOT
     }
     console.log(this.config)
 }
