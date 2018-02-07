@@ -1,6 +1,6 @@
 let ConfigOverride
 try{
-    ConfigOverride = require("./config2.json")
+    ConfigOverride = require("./config.json")
 } catch (e) {
     // console.log(e)
 }
