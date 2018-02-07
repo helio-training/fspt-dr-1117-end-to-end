@@ -1,5 +1,6 @@
 'use strict'
 
+const Config = require('./Config')
 const Hapi = require('hapi')
 const Monk = require('monk')
 
@@ -9,7 +10,7 @@ const server = Hapi.server({
 })
 
 const getCarsCollection = async () => {
-  const connectionString = 'mongodb://application:super1337@ds113358.mlab.com:13358/dealership'
+  const connectionString = Config.mongoConnString
   const db = Monk(connectionString)
   const cars = await db.get('cars')
   return cars
