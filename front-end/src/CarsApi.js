@@ -9,7 +9,10 @@ const runConfig = () => {
     this.config = {
         carsApiRoot: ConfigOverride 
                         ? ConfigOverride.carsApiRoot 
-                        : process.env.REACT_APP_CARS_API_ROOT
+                        : process.env.REACT_APP_CARS_API_ROOT,
+        graphQL: ConfigOverride
+                    ? ConfigOverride.graphQL
+                    : process.env.REACT_APP_GRAPH_QL
     }
     console.log(this.config)
 }
@@ -41,5 +44,6 @@ const getData = async (path) => {
 
 export default {
     post: postData,
-    get: getData
+    get: getData,
+    graphQL: this.config.graphQL
 }
