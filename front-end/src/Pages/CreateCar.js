@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import CarsApi from './../CarsApi'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
-export default class extends Component {
+class CreateCar extends Component {
     state = {
         make: "",
         model: "",
@@ -29,7 +31,12 @@ export default class extends Component {
     }
 
     clickHandler = async () => {
-        await CarsApi.post("/cars", this.state)
+        //await CarsApi.post("/cars", this.state)
+        const car = await this.props.mutate({
+            variables: this.state
+          })
+
+        console.log(car)
     }
 
     render() {
@@ -44,3 +51,22 @@ export default class extends Component {
         )
     }
 }
+
+const mutation = gql `
+    mutation (
+            $make: String!
+            $model: String!
+            $year: Int!
+            $mileage: Int
+        ) {
+            createCar(
+                make: $make
+                model: $model
+                year: $year
+                mileage: $mileage
+            ) {
+                id make model year mileage
+            }
+        }
+    `
+export default graphql(mutation)(CreateCar)

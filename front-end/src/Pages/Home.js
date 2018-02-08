@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 import CarsApi from "./../CarsApi"
 
-export default class extends Component {
+class Home extends Component {
     state = {
         cars: [],
         planes: []
     }
     
-    async componentDidMount() {
+    getFromMongoDB = async () => {
         const carsResponse = await CarsApi.get("/cars")
         const planesResponse = await CarsApi.get("/planes")
 
@@ -16,6 +18,10 @@ export default class extends Component {
             cars: carsResponse.cars, 
             planes: planesResponse.planes
         })
+    }
+
+    async componentDidMount() {
+        //await getFromMongoDB();
     }
     
     renderCar = (car) => {
@@ -30,11 +36,16 @@ export default class extends Component {
     }
 
     renderCars = (cars) => {
+        if (!cars) {
+            console.log("loading", cars)
+            return (<div>Loading...</div>)
+        }
+
         const carElements = cars
-            .filter((car, index, array) => {
-                return ("C" <= car.make && car.make <= "Z")
-                    || ("c" <= car.make && car.make <= "z")
-            })
+            // .filter((car, index, array) => {
+            //     return ("C" <= car.make && car.make <= "Z")
+            //         || ("c" <= car.make && car.make <= "z")
+            // })
             .map(this.renderCar)
 
         return carElements
@@ -60,8 +71,18 @@ export default class extends Component {
         return (
             <div>
                 {this.state.planes.map(this.renderPlane)}
-                {this.renderCars(this.state.cars)}
+                {this.renderCars(this.props.data.allCars)}
             </div>
         )
     }
 }
+
+const query = gql `
+query {
+    allCars {
+      id make model year mileage
+    }
+}
+`
+
+export default graphql(query)(Home)
