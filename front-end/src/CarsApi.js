@@ -14,10 +14,8 @@ const runConfig = () => {
                     ? ConfigOverride.graphQL
                     : process.env.REACT_APP_GRAPH_QL
     }
-    console.log(this.config)
 }
 runConfig()
-console.log(this.config)
 
 
 const postData = async (path, data) => {
