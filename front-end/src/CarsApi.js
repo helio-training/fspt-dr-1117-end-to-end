@@ -17,7 +17,6 @@ const runConfig = () => {
 }
 runConfig()
 
-
 const postData = async (path, data) => {
     const url = `${this.config.carsApiRoot}${path}`
     const response = await fetch(url, {
